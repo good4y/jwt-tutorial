@@ -1,3 +1,5 @@
 GET http://localhost:8080/api/user/silvernine
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer
+
+// 토큰 없음. 401
