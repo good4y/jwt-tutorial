@@ -1,2 +1,13 @@
-package inflearn.study.jwttutorial.dto;public class TokenDto {
+package inflearn.study.jwttutorial.dto;
+
+import lombok.*;
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class TokenDto {
+
+  private String token;
 }

@@ -1,2 +1,12 @@
-package inflearn.study.jwttutorial.dto;public class AuthorityDto {
+package inflearn.study.jwttutorial.dto;
+
+import lombok.*;
+
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class AuthorityDto {
+  private String authorityName;
 }
