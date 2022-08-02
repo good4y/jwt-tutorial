@@ -14,6 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
+// 필터에 빈을 등록하여 이용하기 위해 extends
 public class JwtFilter extends GenericFilterBean {
 
   private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
@@ -27,6 +28,7 @@ public class JwtFilter extends GenericFilterBean {
   }
 
   // JWT의 인증 정보를 현재 실행중인 securityContext에 저장하는 역할을 수행
+  // 아래의 resolveToken 메소드를 통해 토큰을 받아와서 유효성 검증을 하여 정상이면 security context에 저장
   @Override
   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
       throws IOException, ServletException {

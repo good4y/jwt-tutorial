@@ -7,17 +7,15 @@ import inflearn.study.jwttutorial.jwt.TokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)  // preauthorize 어노테이션을 메서드 단위로 사용하기 위한 어노테이션
+@EnableWebSecurity(debug = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)  // preauthorize 어노테이션을 메서드 단위로 사용하기 위한 어노테이션 (controller)
 public class SecurityConfig {
   private final TokenProvider tokenProvider;
   private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -71,6 +69,7 @@ public class SecurityConfig {
 
     // JWT 필터 적용
     http.apply(new JwtSecurityConfig(tokenProvider));
+
     return http.build();
   }
 }

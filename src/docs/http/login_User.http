@@ -7,6 +7,6 @@ Content-Type: application/json
 }
 
 > {%
-client.global.set("token", response.body.token);
+client.global.set("token", response.headers.valueOf("Authorization"));
 client.log("Token: "+client.global.get("token"));
 %}

@@ -28,18 +28,21 @@ public class AuthController {
     this.authenticationManagerBuilder = authenticationManagerBuilder;
   }
 
+  // 로그인
   @PostMapping("/authenticate")
   public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
 
     UsernamePasswordAuthenticationToken authenticationToken =
         new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
+    // 해당 메서드에서 CustomUserDetailsService가 호출이 된다!
     Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
     String jwt = tokenProvider.createToken(authentication);
 
     HttpHeaders httpHeaders = new HttpHeaders();
+    // response header 에 jwt 넣어서 보냄
     httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 
     return new ResponseEntity<>(new TokenDto(jwt), httpHeaders, HttpStatus.OK);
