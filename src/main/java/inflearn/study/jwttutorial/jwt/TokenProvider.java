@@ -40,6 +40,7 @@ public class TokenProvider implements InitializingBean {
     this.tokenValidityInMilliseconds = tokenValidityInSeconds * 1000;
   }
 
+  // implements initializeBean
   // @Component 를 이용해 빈이 생성 되고 의존성 주입을 받은 뒤, secret 값을 decode 후 KeY 변수에 할당하기 위함.
   // secret key를 base64로 디코드하여 바이너리로 만듦. hs512를 이용하기 때문에 64바이트 이상.
   @Override
@@ -55,6 +56,7 @@ public class TokenProvider implements InitializingBean {
         .map(GrantedAuthority::getAuthority)
         .collect(Collectors.joining(","));
     System.out.println(authorities);
+
     // token expire 설정 (application.yml)
     long now = (new Date()).getTime();
     Date validity = new Date(now + this.tokenValidityInMilliseconds);
